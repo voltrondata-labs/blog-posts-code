@@ -21,10 +21,10 @@ con = ibis.snowflake.connect(
 (h21 := con.table("2021_5year_household")
 ```
 
-```{python }
+```{python}
 energy_data = (
     h21
-	 .filter((
+    .filter((
         (_.DIVISION == 5) & (_.TYPEHUGQ == 1)
     ))
     .select(
@@ -43,7 +43,8 @@ energy_data = (
 s3 = fs.S3FileSystem(
     region = "<your AWS region>",
     access_key = "<your AWS access key>",
-    secret_key = "<your AWS secret key>"
+    secret_key = "<your AWS secret key>",
+    session_token = "<yout AWS sessin token>"
 )
 
 pq.write_to_dataset(
@@ -56,7 +57,7 @@ s3.get_file_info(fs.FileSelector('<your bucket name>/<you folder to hold the res
 ```
 
 
-```{r }
+```{r}
 library(arrow)
 
 energy_s3 <- s3_bucket(
@@ -97,7 +98,7 @@ calc_ratio_energy <- function(.data, var, ratio = 0.3) {
   .data |>
     group_by(ST, PUMA) |>
     summarize(
-      p_above_30 = mean({{ var }} > ratio)
+      p_above_ratio = mean({{ var }} > ratio)
     ) |>
     collect()
 }
@@ -129,7 +130,7 @@ se_atl_pumas <- map_dfr(
 plot_energy_ratio <- function(d) {
   se_atl_pumas  |>
     left_join(d, by = c("STATEFP10" = "ST", "PUMACE10" = "PUMA"))  |>
-    ggplot(aes(fill = p_above_30)) +
+    ggplot(aes(fill = p_above_ratio)) +
     geom_sf(size = 0.2, color="white") +
     scale_fill_viridis_b(
       name = NULL,
