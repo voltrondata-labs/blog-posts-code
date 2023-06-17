@@ -1,8 +1,11 @@
 ---
 title: "Combining Ibis and R for enterprise-scale reporting"
 author: "François Michonneau"
+date: 2023-06-22
 ---
 
+This Quarto file contains the code shown in the blog post "Pass Data Between
+Python and R using Parquet & Arrow for Scalable Reporting" published on the Voltron Data website.
 
 ```{python}
 import os
