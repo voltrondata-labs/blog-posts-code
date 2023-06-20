@@ -1,5 +1,5 @@
 ---
-title: "Combining Ibis and R for enterprise-scale reporting"
+title: "Pass Data Between Python and R using Parquet & Arrow for Scalable Reporting"
 author: "François Michonneau"
 date: 2023-06-22
 ---
