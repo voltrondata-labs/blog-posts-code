@@ -96,7 +96,7 @@ se_energy <- energy |>
   )
 ```
 
-```{r }
+```{r}
 calc_ratio_energy <- function(.data, var, ratio = 0.3) {
   .data |>
     group_by(ST, PUMA) |>
@@ -116,7 +116,7 @@ gas_ratio <-  se_energy |>
 ```
 
 
-```{r }
+```{r}
 library(tigris)
 library(ggplot2)
 library(purrr)
